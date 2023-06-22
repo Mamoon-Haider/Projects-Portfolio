@@ -146,7 +146,40 @@ FROM uber_rides
 		GROUP BY range_of_miles
 		ORDER BY number_of_rides DESC;     ---Rides of shorter distance were more frequent, means people are more lean towards using app if they need to go somewhere near---
 
+----Let's analyze the purpose for which people mostly use rides---
 
+SELECT 
+		CATEGORY, COUNT(START_DATE) AS Number_of_rides
+FROM uber_rides
+		GROUP BY CATEGORY
+		ORDER BY Number_of_rides DESC;  ---More than 90% of the rides were in Business category---
+
+
+----Purpose of the Rides----
+
+SELECT 
+		PURPOSE, COUNT(START_DATE) AS Number_of_rides
+FROM uber_rides
+		GROUP BY PURPOSE
+		ORDER BY Number_of_rides DESC;  ---Meeting,Entertainment, Supplies are top 3 purposes of users of app---
+
+----How many miles covered by rides of each purposes----
+
+SELECT 
+		PURPOSE, SUM(MILES) AS Total_Miles
+FROM uber_rides
+		GROUP BY PURPOSE
+		ORDER BY Total_Miles DESC;     ---Meeting, Customer visit, Entertainment are top 3 purposes in terms of miles covered---
+	
+
+----Monthly rides based on category----
+
+SELECT 
+		month_of_ride, CATEGORY, 
+		COUNT(START_DATE) AS Number_of_rides
+FROM uber_rides
+		GROUP BY month_of_ride,CATEGORY
+		ORDER BY month_of_ride;
 
 
 SELECT *
